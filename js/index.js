@@ -19,7 +19,7 @@ function calculateAll() {
   updateSubtotal(singleProduct);
 
   const allProduct = document.getElementsByClassName('product');
-  console.log(typeof allProduct);
+
   let sum = 0;
   Array.from(allProduct).forEach((element) => {
     sum += updateSubtotal(element);
@@ -50,11 +50,28 @@ function removeProduct(event) {
 
 function createProduct(event) {
   const target = event.currentTarget;
-  console.log(target);
-  const createProduct = document.createElement('tr');
-  createProduct.textContent = 'Ironhack Rubber Bottle';
-  createProduct.classList.add('tr');
-  document.body.appendChild(createProduct);
+  // console.log(target);
+  // const createProduct = document.createElement('tr');
+  // createProduct.textContent = 'Ironhack Rubber Bottle';
+  // createProduct.classList.add('tr');
+  // document.body.appendChild(createProduct);
+  // var tbody = document.querySelector('tbody');
+
+  const tbody = document.querySelector('tbody');
+  const template = document.querySelector('#newproduct');
+
+  // Clone the new row and insert it into the table
+  const clone = template.content.cloneNode(true);
+  const td = clone.querySelectorAll('td');
+
+  tbody.appendChild(clone);
+  td[0].textContent = document.querySelector(
+    '.create-product input[type="text"]'
+  ).value;
+  td[1].textContent =
+    '$' + document.querySelector('.create-product input[type="number"]').value;
+
+  tbody.appendChild(clone);
 }
 
 window.addEventListener('load', () => {
